@@ -1,0 +1,69 @@
+﻿@model WebApplication.Models.megalist
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Layouts/_shop.cshtml";
+}
+
+@foreach (var product in Model.productList)
+{
+    <div class="col-md-4 col-sm-6">
+        <!-- product grid start -->
+        <div class="product-item">
+            <figure class="product-thumb">
+                <a href="@Url.RouteUrl("product-detail", new { link = product.prodLink })">
+                    <img class="pri-img" src="@product.prodRevImg" alt="@product.prodName">
+                    <img class="sec-img" src="@product.prodImg1" alt="@product.prodName">
+                    @*<img class="pri-img" src="@Url.Content("~/Images/product/" + product.catName.ToLower() + "/" + product.prodRevImg)" alt="@product.prodName">
+            <img class="sec-img" src="@Url.Content("~/Images/product/" + product.catName.ToLower() + "/" + product.prodImg1)" alt="@product.prodName">*@
+                </a>
+                @if (Session["id"] != null)
+                {
+                    <div class="cart-hover">
+                        <button class="btn btn-cart" onclick="location.href='@Url.Action("addToCart", "cart", new { productId = product.prodID, quantity = 1 })'">Add to cart</button>
+                    </div>
+                }
+            </figure>
+            <div class="product-caption text-center">
+                <div class="product-identity">
+                    <a href="@Url.RouteUrl("category-detail", new { link = product.categories.catLink })">@product.categories.catName</a>
+                </div>
+                <h6 class="product-name">
+                    <a href="@Url.RouteUrl("product-detail", new { link = product.prodLink })">@product.prodName</a>
+                </h6>
+                <div class="price-box">
+                    <span class="price-regular">$@product.prodPrice.ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+        <!-- product grid end -->
+        <!-- product list item start -->
+        <div class="product-list-item">
+            <figure class="product-thumb">
+                <a href="@Url.RouteUrl("product-detail", new { link = product.prodLink })">
+                    <img class="pri-img" src="@product.prodRevImg" alt="@product.prodName">
+                    <img class="sec-img" src="@product.prodImg1" alt="@product.prodName">
+                    @*<img class="pri-img" src="@Url.Content("~/Images/product/" + product.catName.ToLower() + "/" + product.prodRevImg)" alt="@product.prodName">
+            <img class="sec-img" src="@Url.Content("~/Images/product/" + product.catName.ToLower() + "/" + product.prodImg1)" alt="@product.prodName">*@
+                </a>
+                @if (Session["id"] != null)
+                {
+                    <div class="cart-hover">
+                        <button class="btn btn-cart" onclick="location.href='@Url.Action("addToCart", "cart", new { productId = product.prodID, quantity = 1 })'">Add to cart</button>
+                    </div>
+                }
+                </figure>
+            <div class="product-content-list">
+                <div class="manufacturer-namey">
+                    <a href="@Url.RouteUrl("category-detail", new { link = product.categories.catLink })">@product.categories.catName</a>
+                </div>
+                <h5 class="product-name">
+                    <a href="@Url.RouteUrl("product-detail", new { link = product.prodLink })">@product.prodName</a>
+                </h5>
+                <div class="price-box">
+                    <span class="price-regular">$@product.prodPrice.ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+        <!-- product list item end -->
+    </div>
+}

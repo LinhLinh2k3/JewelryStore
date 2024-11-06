@@ -1,0 +1,68 @@
+﻿<!-- ================== css ================== -->
+<!-- Bootstrap (css) -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/bootstrap")" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- Pe-icon-7-stroke CSS -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/pe-icon-7-stroke")" integrity="sha256-AJfZWudfDWpFpIZ3USExGYDGwsYz47IgfEQCiGTm4wQ=" crossorigin="anonymous">
+<!-- Font awesome -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/fontawesome")" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Slick slider css -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/slick-carousel")" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Animate.css -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/animate.css")" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Nice select css -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/nice-select")" integrity="sha512-uHuCigcmv3ByTqBQQEwngXWk7E/NaPYP+CFglpkXPnRQbSubJmEENgh+itRDYbWV0fUZmUz7fD/+JDdeQFD5+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- jquery UI css -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/jquery-ui")" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Toastr css -->
+<link rel="stylesheet" href="@Styles.Url("~/assets/css/toastr")" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Stylesheet -->
+@Styles.Render("~/assets/css")
+
+<!-- Override bootstrap 5 input for label -->
+<style>
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label,
+    .form-floating > .form-select ~ label {
+        opacity: 1;
+        transform: scale(0.8) translateY(-28px) translateX(.5rem);
+        padding: 1rem 0.65rem;
+    }
+
+    .form-floating > .form-control-plaintext:focus,
+    .form-floating > .form-control-plaintext:not(:placeholder-shown),
+    .form-floating > .form-control:focus,
+    .form-floating > .form-control:not(:placeholder-shown) {
+        padding-top: 1rem;
+    }
+
+    #avatarReg {
+        margin-left: 50%;
+        margin-right: 50%;
+        display: block;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #dfdfdf;
+    }
+
+    .single-input-item .nice-select {
+        border-radius: 5px;
+        line-height: 3.25;
+    }
+
+    .single-input-item .col-6 .form-floating > label {
+        padding: 0.6rem 0.75rem
+    }
+
+    .single-input-item .col-6 .form-floating > .form-control:focus ~ label {
+        opacity: 1;
+        transform: scale(0.8) translateY(-24px) translateX(.5rem);
+        padding: 1rem 0.65rem;
+    }
+
+    .single-input-item .col-6 .form-floating .form-control {
+        height: calc(3rem);
+        min-height: calc(3rem);
+    }
+</style>

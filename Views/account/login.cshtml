@@ -1,0 +1,71 @@
+﻿@model WebApplication.Models.users
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Layouts/_userUI.cshtml";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- login wrapper start -->
+    <div class="login-register-wrapper section-padding">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                    <!-- Space -->
+                    <div class="col-lg-3"></div>
+                    <!-- Login Content Start -->
+                    <div class="col-lg-6">
+                        <div class="login-reg-form-wrap">
+                            <h5>Sign In</h5>
+                            @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form", novalidate = "novalidate" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-floating single-input-item">
+                                    @Html.TextBoxFor(m => m.userAccount, new { @class = "form-control", @placeholder = "Email or Username", @required = "required" })
+                                    @Html.LabelFor(m => m.userAccount)
+                                    @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.PasswordFor(m => m.userPassword, new { @class = "form-control", @placeholder = "Password", @required = "required" })
+                                    @Html.LabelFor(m => m.userPassword)
+                                    @Html.ValidationMessageFor(m => m.userPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="single-input-item form-group">
+                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                        @Html.ActionLink("Register a new user?", "register", "account", new { area = "" }, new { @class = "forget-pwd", @style = "color: #003468;" })
+                                        @Html.ActionLink("Forget your password?", "forgotpassword", "account", new { area = "" }, new { @class = "forget-pwd" })
+                                    </div>
+                                </div>
+                                <div class="single-input-item">
+                                    <button type="submit" class="btn btn-sqr col-lg-4">Login</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- Login Content End -->
+                    <!-- Space -->
+                    <div class="col-lg-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login wrapper end -->
+</main>

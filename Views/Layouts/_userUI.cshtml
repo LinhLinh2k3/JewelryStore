@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    @Html.Partial("~/Views/Layouts/Components/User/_stylesheet.cshtml")
+</head>
+<body>
+    @Html.Partial("~/Views/Layouts/Components/User/_header.cshtml", new WebApplication.Models.megalist())
+    @Html.Partial("~/Views/Layouts/Components/System/_nofication.cshtml")
+
+    @RenderBody()
+
+    @Html.Partial("~/Views/Layouts/Components/User/_scrollToTop.cshtml")
+    @Html.Partial("~/Views/Layouts/Components/User/_footer.cshtml")
+
+    @*@Html.Partial("~/Views/Layouts/Components/User/_viewModal.cshtml")*@
+    @*@Html.Partial("~/Views/Layouts/Components/User/_miniCart.cshtml", new WebApplication.Models.megalist())*@
+
+    @Html.Partial("~/Views/Layouts/Components/User/_javascript.cshtml")
+</body>
+</html>

@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cartItems">
+          <Key>
+            <PropertyRef Name="cartID" />
+            <PropertyRef Name="prodID" />
+          </Key>
+          <Property Name="cartID" Type="int" Nullable="false" />
+          <Property Name="prodID" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="catID" />
+          </Key>
+          <Property Name="catID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="catLink" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materials">
+          <Key>
+            <PropertyRef Name="matID" />
+          </Key>
+          <Property Name="matID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="matLink" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="prodID" />
+          </Key>
+          <Property Name="prodID" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="prodName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="prodPrice" Type="int" Nullable="false" />
+          <Property Name="prodDesc" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="prodAmount" Type="bigint" Nullable="false" />
+          <Property Name="prodLink" Type="varchar(max)" Nullable="false" />
+          <Property Name="prodRevImg" Type="varchar(max)" Nullable="false" />
+          <Property Name="prodImg1" Type="varchar(max)" />
+          <Property Name="prodImg2" Type="varchar(max)" />
+          <Property Name="prodImg3" Type="varchar(max)" />
+          <Property Name="prodImg4" Type="varchar(max)" />
+          <Property Name="catID" Type="int" Nullable="false" />
+          <Property Name="matID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userEmail" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="userPhone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="userPassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="userGender" Type="int" Nullable="false" />
+          <Property Name="userAvatar" Type="varchar(max)" />
+          <Property Name="userAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="userBio" Type="text" />
+          <Property Name="roleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="cat_prod">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="catID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="catID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mat_prod">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="matID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="matID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="prod_cart">
+          <End Role="products" Type="Self.products" Multiplicity="1" />
+          <End Role="cartItems" Type="Self.cartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="prodID" />
+            </Principal>
+            <Dependent Role="cartItems">
+              <PropertyRef Name="prodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="cartItems" EntityType="Self.cartItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materials" EntityType="Self.materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="cat_prod" Association="Self.cat_prod">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="mat_prod" Association="Self.mat_prod">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="prod_cart" Association="Self.prod_cart">
+            <End Role="products" EntitySet="products" />
+            <End Role="cartItems" EntitySet="cartItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="catID" />
+          </Key>
+          <Property Name="catID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="catLink" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.cat_prod" FromRole="categories" ToRole="products" />
+        </EntityType>
+        <EntityType Name="materials">
+          <Key>
+            <PropertyRef Name="matID" />
+          </Key>
+          <Property Name="matID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="matLink" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.mat_prod" FromRole="materials" ToRole="products" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="prodID" />
+          </Key>
+          <Property Name="prodID" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="prodName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prodPrice" Type="Int32" Nullable="false" />
+          <Property Name="prodDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prodAmount" Type="Int64" Nullable="false" />
+          <Property Name="prodLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prodRevImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prodImg1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="prodImg2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="prodImg3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="prodImg4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="catID" Type="Int32" Nullable="false" />
+          <Property Name="matID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="categories" Relationship="Self.cat_prod" FromRole="products" ToRole="categories" />
+          <NavigationProperty Name="materials" Relationship="Self.mat_prod" FromRole="products" ToRole="materials" />
+          <NavigationProperty Name="cartItems" Relationship="DatabaseModel.prod_cart" FromRole="products" ToRole="cartItems" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userGender" Type="Int32" Nullable="false" />
+          <Property Name="userAvatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="userBio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="roleID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="cat_prod">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="catID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="catID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mat_prod">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="matID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="matID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.categories" />
+          <EntitySet Name="materials" EntityType="Self.materials" />
+          <EntitySet Name="products" EntityType="Self.products" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="cat_prod" Association="Self.cat_prod">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="mat_prod" Association="Self.mat_prod">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <EntitySet Name="cartItems" EntityType="DatabaseModel.cartItems" />
+          <AssociationSet Name="prod_cart" Association="DatabaseModel.prod_cart">
+            <End Role="products" EntitySet="products" />
+            <End Role="cartItems" EntitySet="cartItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="cartItems">
+          <Key>
+            <PropertyRef Name="cartID" />
+            <PropertyRef Name="prodID" />
+          </Key>
+          <Property Name="cartID" Type="Int32" Nullable="false" />
+          <Property Name="prodID" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="DatabaseModel.prod_cart" FromRole="cartItems" ToRole="products" />
+        </EntityType>
+        <Association Name="prod_cart">
+          <End Type="DatabaseModel.products" Role="products" Multiplicity="1" />
+          <End Type="DatabaseModel.cartItems" Role="cartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="prodID" />
+            </Principal>
+            <Dependent Role="cartItems">
+              <PropertyRef Name="prodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="DatabaseModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="catID" ColumnName="catID" />
+                <ScalarProperty Name="catName" ColumnName="catName" />
+                <ScalarProperty Name="catLink" ColumnName="catLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materials">
+            <EntityTypeMapping TypeName="DatabaseModel.materials">
+              <MappingFragment StoreEntitySet="materials">
+                <ScalarProperty Name="matID" ColumnName="matID" />
+                <ScalarProperty Name="matName" ColumnName="matName" />
+                <ScalarProperty Name="matLink" ColumnName="matLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="DatabaseModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="prodID" ColumnName="prodID" />
+                <ScalarProperty Name="prodName" ColumnName="prodName" />
+                <ScalarProperty Name="prodPrice" ColumnName="prodPrice" />
+                <ScalarProperty Name="prodDesc" ColumnName="prodDesc" />
+                <ScalarProperty Name="prodAmount" ColumnName="prodAmount" />
+                <ScalarProperty Name="prodLink" ColumnName="prodLink" />
+                <ScalarProperty Name="prodRevImg" ColumnName="prodRevImg" />
+                <ScalarProperty Name="prodImg1" ColumnName="prodImg1" />
+                <ScalarProperty Name="prodImg2" ColumnName="prodImg2" />
+                <ScalarProperty Name="prodImg3" ColumnName="prodImg3" />
+                <ScalarProperty Name="prodImg4" ColumnName="prodImg4" />
+                <ScalarProperty Name="catID" ColumnName="catID" />
+                <ScalarProperty Name="matID" ColumnName="matID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="DatabaseModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="userFullName" ColumnName="userFullName" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userGender" ColumnName="userGender" />
+                <ScalarProperty Name="userAvatar" ColumnName="userAvatar" />
+                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
+                <ScalarProperty Name="userBio" ColumnName="userBio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cartItems">
+            <EntityTypeMapping TypeName="DatabaseModel.cartItems">
+              <MappingFragment StoreEntitySet="cartItems">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="prodID" ColumnName="prodID" />
+                <ScalarProperty Name="cartID" ColumnName="cartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

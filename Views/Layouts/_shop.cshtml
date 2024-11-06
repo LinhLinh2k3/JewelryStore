@@ -1,0 +1,181 @@
+﻿@model WebApplication.Models.megalist
+@{
+    Layout = "~/Views/Layouts/_userUI.cshtml";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">shop</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- page main wrapper start -->
+    <div class="shop-main-wrapper section-padding">
+        <div class="container">
+            <div class="row">
+                <!-- sidebar area start -->
+                <div class="col-lg-3 order-2 order-lg-1">
+                    <aside class="sidebar-wrapper">
+                        <!-- single sidebar start -->
+                        <div class="sidebar-single">
+                            <h5 class="sidebar-title">categories</h5>
+                            <div class="sidebar-body">
+                                <ul class="shop-categories">
+                                    @foreach (var cat in Model.categoryList)
+                                    {
+                                        <li><a href="@Url.RouteUrl("category-detail", new { link = cat.catLink })">@cat.catName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- single sidebar end -->
+                        <!-- single sidebar start -->
+                        <div class="sidebar-single">
+                            <h5 class="sidebar-title">Materials</h5>
+                            <div class="sidebar-body">
+                                <ul class="checkbox-container categories-list">
+                                    @foreach (var mat in Model.materialList)
+                                    {
+                                        <li>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="@mat.matID">
+                                                <label class="custom-control-label" for="@mat.matID">@mat.matName</label>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- single sidebar end -->
+                        <!-- single sidebar start -->
+                        <div class="sidebar-banner">
+                            <div class="img-container">
+                                <a href="#">
+                                    <img src="@Url.Content("~/Image/banner/sidebar-banner.jpg")" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- single sidebar end -->
+                    </aside>
+                </div>
+                <!-- sidebar area end -->
+                <!-- shop main wrapper start -->
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="shop-product-wrapper">
+                        <!-- shop product top wrap start -->
+                        <div class="shop-top-bar">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 col-md-6 order-2 order-md-1">
+                                    <div class="top-bar-left">
+                                        <div class="product-view-mode">
+                                            <a class="active" href="#" data-target="grid-view" data-bs-toggle="tooltip" title="" data-bs-original-title="Grid View" aria-label="Grid View"><i class="fa fa-th"></i></a>
+                                            <a href="#" data-target="list-view" data-bs-toggle="tooltip" title="" data-bs-original-title="List View" aria-label="List View"><i class="fa fa-list"></i></a>
+                                        </div>
+                                        <div class="product-amount">
+                                            <p>Showing 1–9 of @Model.totalproductList.Count results</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-6 order-1 order-md-2">
+                                    <div class="top-bar-right">
+                                        <div class="product-short">
+                                            <p>Sort by : </p>
+                                            <select class="nice-select" name="sortby" style="display: none;">
+                                                <option value="trending">relevance</option>
+                                                <option value="sales">name (a - z)</option>
+                                                <option value="sales">name (z - a)</option>
+                                                <option value="rating">price (low &gt; high)</option>
+                                                <option value="date">rating (lowest)</option>
+                                                <option value="price-asc">model (a - z)</option>
+                                                <option value="price-asc">model (z - a)</option>
+                                            </select>
+                                            <div class="nice-select" tabindex="0">
+                                                <span class="current">relevance</span>
+                                                <ul class="list">
+                                                    <li data-value="trending" class="option selected">relevance</li>
+                                                    <li data-value="sales" class="option">name (a - z)</li>
+                                                    <li data-value="sales" class="option">name (z - a)</li>
+                                                    <li data-value="rating" class="option">price (low &gt; high)</li>
+                                                    <li data-value="date" class="option">rating (lowest)</li>
+                                                    <li data-value="price-asc" class="option">model (a - z)</li>
+                                                    <li data-value="price-asc" class="option">model (z - a)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- shop product top wrap start -->
+                        <!-- product item list wrapper start -->
+                        <div class="shop-product-wrap row mbn-30 grid-view">
+                            <!-- product single item start -->
+                            @RenderBody()
+                            <!-- product single item end -->
+                        </div>
+                        <!-- product item list wrapper end -->
+                        <!-- start pagination area -->
+                        <div class="paginatoin-area text-center">
+                            <ul class="pagination-box">
+                                <li>
+                                    @if (ViewBag.Page > 0)
+                                    {
+                                        <a class="previous" href="@Url.Action("shop", new { page = ViewBag.Page - 1 })"><i class="pe-7s-angle-left"></i></a>
+                                    }
+                                </li>
+                                @for (int i = 0; i <= ViewBag.MaxPage; i++)
+                                {
+                                    if (i == ViewBag.Page)
+                                    {
+                                        <li class="active"><a href="@Url.Action("shop", new { page = i })">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("shop", new { page = i })">@i</a></li>
+                                    }
+                                }
+                                <li>
+                                    @if (ViewBag.Page < ViewBag.MaxPage)
+                                    {
+                                        <a class="next" href="@Url.Action("shop", new { page = ViewBag.Page + 1 })"><i class="pe-7s-angle-right"></i></a>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end pagination area -->
+                    </div>
+                </div>
+                <!-- shop main wrapper end -->
+            </div>
+        </div>
+    </div>
+    <!-- page main wrapper end -->
+</main>
+@*<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="delmodal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-3 shadow">
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-0">enable this setting?</h5>
+                <p class="mb-0">you can always change your mind in your account settings.</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <a href="url.action("delete", "product", new { prodid = )"></a>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>yes, enable</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">no thanks</button>
+            </div>
+        </div>
+    </div>
+</div>*@

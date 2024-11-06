@@ -1,0 +1,121 @@
+﻿@model WebApplication.Models.products
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Layouts/_adminUI.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.prodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodRevImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodRevImg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodImg1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodImg1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodImg2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodImg2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodImg3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodImg3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prodImg4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prodImg4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categories.catName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categories.catName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materials.matName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materials.matName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

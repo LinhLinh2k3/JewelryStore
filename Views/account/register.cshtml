@@ -1,0 +1,115 @@
+﻿@model WebApplication.Models.users
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Layouts/_userUI.cshtml";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Register</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- register wrapper start -->
+    <div class="login-register-wrapper section-padding">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                    <!-- Space -->
+                    <div class="col-lg-3"></div>
+                    <!-- Login Content Start -->
+                    <div class="col-lg-6">
+                        <div class="login-reg-form-wrap">
+                            <h5>Register</h5>
+                            @using (Html.BeginForm("register", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form", novalidate = "novalidate", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="single-input-item">
+                                    @Html.LabelFor(m => m.userAvatar, new { @class = "mb-4" })
+                                    <img class="mx-auto" id="avatarReg" src="~/Images/icon/avatar-person.png" />
+                                    <div class="input-group">
+                                        <input type="file" class="form-control mt-4" name="userAvatar" id="upload" accept="image/png, image/jpeg, image/gif" />
+                                    </div>
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.TextBoxFor(m => m.userFullName, new { @class = "form-control", @placeholder = "Full name", @required = "required" })
+                                    @Html.LabelFor(m => m.userFullName)
+                                    @Html.ValidationMessageFor(m => m.userFullName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Username", @required = "required" })
+                                    @Html.LabelFor(m => m.username)
+                                    @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="single-input-item row">
+                                    <div class="col-6">
+                                        @Html.DropDownListFor(m => m.userGender, new SelectList(new List<Object> { new { value = "", text = "Gender" }, new { value = "1", text = "Male" }, new { value = "0", text = "Female" }, new { value = "2", text = "Bisexual" }, new { value = "3", text = "Hidden" } }, "value", "text"), new { @class = "form-control", @style = "border-radius: 15px", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.userGender, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            @Html.TextBoxFor(m => m.userPhone, new { @class = "form-control", @placeholder = "Phone number", @required = "required" })
+                                            @Html.LabelFor(m => m.userPhone)
+                                            @Html.ValidationMessageFor(m => m.userPhone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.TextBoxFor(m => m.userEmail, new { @class = "form-control", @placeholder = "Email", @required = "required" })
+                                    @Html.LabelFor(m => m.userEmail)
+                                    @Html.ValidationMessageFor(m => m.userEmail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.PasswordFor(m => m.userPassword, new { @class = "form-control", @placeholder = "Password", @required = "required" })
+                                    @Html.LabelFor(m => m.userPassword)
+                                    @Html.ValidationMessageFor(m => m.userPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating single-input-item">
+                                    @Html.PasswordFor(m => m.comfirmPassword, new { @class = "form-control", @placeholder = "Repeat password", @required = "required" })
+                                    @Html.LabelFor(m => m.comfirmPassword)
+                                    @Html.ValidationMessageFor(m => m.comfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="single-input-item form-group">
+                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                        @Html.ActionLink("Already have account? Signin!", "login", "account", new { area = "" }, new { @class = "forget-pwd mx-auto", @style = "font-size: " })
+                                    </div>
+                                </div>
+                                <div class="single-input-item">
+                                    <button type="submit" class="btn btn-sqr col-lg-4">Sign up</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- Login Content End -->
+                    <!-- Space -->
+                    <div class="col-lg-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- register wrapper end -->
+    <script>
+        document.getElementsByClassName("form-horizontal").addEventListener("change", function() {
+        var fileInput = this;
+        if (fileInput.files[0].size > 10 * 1024 * 1024) {
+            //alert("File size exceeds the limit (10MB). Please choose a smaller file.");
+            fileInput.value = ""; // Clear the file input
+        }
+    });
+    </script>
+
+</main>

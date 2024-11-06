@@ -1,0 +1,112 @@
+﻿@model WebApplication.Models.cart 
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Layouts/_userUI.cshtml";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/shop">shop</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">cart</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- cart main wrapper start -->
+    <div class="cart-main-wrapper section-padding">
+        <div class="container">
+            <div class="section-bg-color">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @if (Model.items.Count > 0)
+                        {
+                            <!-- Cart Table Area -->
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-title">Product</th>
+                                            <th class="pro-price">Price</th>
+                                            <th class="pro-quantity">Quantity</th>
+                                            <th class="pro-subtotal">Total</th>
+                                            <th class="pro-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.items)
+                                        {
+                                            <tr>
+                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="@item.products.prodRevImg" alt="Product"></a></td>
+                                                <td class="pro-title"><a href="@Url.RouteUrl("product-detail", new { link = item.products.prodLink })">@item.products.prodName</a></td>
+                                                <td class="pro-price">
+                                                    <input type="number" value="@item.products.prodPrice" hidden>
+                                                    <span>$@item.products.prodPrice.ToString("N0")</span>
+                                                </td>
+                                                <td class="pro-quantity">
+                                                    <div class="pro-qty">
+                                                        <span class="dec qtybtn" onclick="location.href='@Url.Action("updateCart", "cart", new { productId = item.products.prodID, quantity = -1 })'">-</span>
+                                                        <input type="text" value="@item.quantity">
+                                                        <span class="inc qtybtn" onclick="location.href='@Url.Action("updateCart", "cart", new { productId = item.products.prodID, quantity = 1 })'">+</span>
+                                                    </div>
+                                                </td>
+                                                <td class="pro-subtotal"><span>$@((item.products.prodPrice * item.quantity).ToString("N0"))</span></td>
+                                                <td class="pro-remove"><a href="@Url.Action("removeFromCart", "cart", new { productId = item.products.prodID })"><i class="fa-solid fa-trash"></i></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="total">
+                                            <td colspan="4" class="text-end fw-semibold">Total</td>
+                                            <td colspan="2" class="total-amount text-center fw-bold">$@ViewBag.TotalPrice.ToString("N0")</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- Cart Update Option -->
+                            <div class="cart-update-option d-block d-md-flex justify-content-between">
+                                <div class="apply-coupon-wrapper">
+                                    <form action="#" method="post" class=" d-block d-md-flex">
+                                        <input type="text" placeholder="Enter Your Coupon Code" required="">
+                                        <button class="btn btn-sqr">Apply Coupon</button>
+                                    </form>
+                                </div>
+                                <div class="cart-update">
+                                    <a href="#" class="btn btn-sqr d-block">Proceed Checkout</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- Cart Table Area -->
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="6" rowspan="3">
+                                                <h2 class="text-center mx-auto">Don't have any products here!</h2>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- cart main wrapper end -->
+</main>

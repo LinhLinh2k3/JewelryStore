@@ -1,0 +1,115 @@
+﻿@model WebApplication.Models.megalist
+
+@{
+    ViewBag.Title = "Product details";
+    Layout = "~/Views/Layouts/_adminUI.cshtml";
+}
+
+<h2>details</h2>
+
+<div>
+    <h4>products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodRevImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodRevImg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodImg1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodImg1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodImg2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodImg2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodImg3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodImg3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.prodImg4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.prodImg4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.categories.catName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.categories.catName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.materials.matName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.materials.matName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.product.prodID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

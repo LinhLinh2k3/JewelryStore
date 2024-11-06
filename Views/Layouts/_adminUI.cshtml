@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+    <title>@ViewBag.Title | Admin Dashboard</title>
+    <!-- [Meta] -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- [Favicon] icon -->
+    <link rel="icon" href="~/Content/assets/images/favicon.svg" type="image/x-icon">
+    @Html.Partial("~/Views/Layouts/Components/Admin/_stylesheet.cshtml")
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-preset="preset-1" data-pc-sidebar-theme="dark" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="pc-loader">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+    <!-- [ Sidebar Menu ] start -->
+    @Html.Partial("~/Views/Layouts/Components/Admin/_sidebar.cshtml")
+    <!-- [ Sidebar Menu ] end -->
+    <!-- [ Header Topbar ] start -->
+    @Html.Partial("~/Views/Layouts/Components/Admin/_header.cshtml")
+    <!-- [ Header ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+        <div class="pc-content">
+            @RenderBody()
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+    <!-- [ Footer ] start -->
+    <!--<footer class="pc-footer">
+        <div class="footer-wrapper container-fluid">
+            <div class="row">
+                <div class="col my-1">
+                    <p class="m-0">
+                        Flat Able &#9829;crafted by Team <a href="https://themeforest.net/user/phoenixcoded" target="_blank">Phoenixcoded</a>
+                    </p>
+                </div>
+                <div class="col-auto my-1">
+                    <ul class="list-inline footer-link mb-0">
+                        <li class="list-inline-item">
+                            <a href="../index.html">Home</a>
+                        </li>-->
+                        <!-- todo link update -->
+                        <!--<li class="list-inline-item">
+                            <a href="https://phoenixcoded.gitbook.io/flat-able-bootstrap/" target="_blank">Documentation</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://phoenixcoded.authordesk.app/" target="_blank">Support</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>-->
+    <!-- [ Footer ] end -->
+    <!-- [Page Specific JS] start -->
+    <script src="~/Content/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="~/Content/assets/js/pages/dashboard-ecommerce.js"></script>
+    <!-- [Page Specific JS] end -->
+    <!-- Required Js -->
+    @Html.Partial("~/Views/Layouts/Components/Admin/_javascript.cshtml")
+</body>
+<!-- [Body] end -->
+</html>
